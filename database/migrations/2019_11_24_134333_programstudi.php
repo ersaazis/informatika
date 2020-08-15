@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Programstudi2 extends Migration
+class Programstudi extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class Programstudi2 extends Migration
     public function up()
     {
         Schema::create('programstudi', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('nama');
             $table->timestamps();
         });

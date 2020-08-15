@@ -14,7 +14,7 @@ class DataPenelitian extends Migration
     public function up()
     {
         Schema::create('data_penelitian', function (Blueprint $table) {
-            $table->increments('id')->nullable();
+            $table->bigIncrements('id')->nullable();
             $table->text('judul')->nullable();
             $table->text('penulis')->nullable();
             $table->text('publis')->nullable();
@@ -22,7 +22,7 @@ class DataPenelitian extends Migration
             $table->text('url')->nullable();
             $table->integer('titasi')->nullable();
             $table->text('url_titasi')->nullable();
-            $table->unsignedInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('signature')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

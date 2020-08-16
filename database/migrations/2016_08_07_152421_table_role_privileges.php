@@ -13,14 +13,16 @@ class TableRolePrivileges extends Migration
     public function up()
     {
         Schema::create('cb_role_privileges', function (Blueprint $table) {
-            $table->bigIncrements("id");
-            $table->integer("cb_roles_id");
-            $table->integer("cb_menus_id");
+            $table->increments("id");
+            $table->unsignedInteger("cb_roles_id");
+            $table->unsignedInteger("cb_menus_id");
             $table->tinyInteger("can_browse")->default(1);
             $table->tinyInteger("can_create")->default(1);
             $table->tinyInteger("can_read")->default(1);
             $table->tinyInteger("can_update")->default(1);
             $table->tinyInteger("can_delete")->default(1);
+            $table->foreign('cb_roles_id')->references('id')->on('cb_roles')->onDelete('cascade');
+            $table->foreign('cb_menus_id')->references('id')->on('cb_menus')->onDelete('cascade');
         });
     }
 

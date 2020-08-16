@@ -593,11 +593,11 @@
         },
         {
             "name": "ersaazis/cb",
-            "version": "1.4",
+            "version": "1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ersaazis/cb.git",
-                "reference": "15143707eac8b9a3d5c81656ee77ee9e95780dc2"
+                "reference": "34aaeeb70070d4e259f3175380599b08ac6bb09a"
             },
             "require": {
                 "doctrine/dbal": "~2.3",
@@ -628,7 +628,7 @@
                 }
             ],
             "description": "belajar",
-            "time": "2020-04-19T14:59:08+00:00"
+            "time": "2020-08-15T19:34:30+00:00"
         },
         {
             "name": "ersaazis/usermanagement",

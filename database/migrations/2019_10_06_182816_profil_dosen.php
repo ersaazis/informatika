@@ -36,7 +36,6 @@ class ProfilDosen extends Migration
             $table->string('id_scopus')->nullable();
             $table->string('id_orchid')->nullable();
 
-            $table->integer('programstudi_id')->nullable();
             $table->boolean('proses_update')->default(1);
             $table->boolean('auto_update')->default(0);
         });

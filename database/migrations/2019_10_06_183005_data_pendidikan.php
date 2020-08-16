@@ -19,9 +19,9 @@ class DataPendidikan extends Migration
             $table->string('nm_sp_formal')->nullable();
             $table->string('namajenjang')->nullable();
             $table->string('singkat_gelar')->nullable();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('users_id');
             $table->string('signature')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

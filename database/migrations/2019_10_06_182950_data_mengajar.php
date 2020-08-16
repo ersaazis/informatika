@@ -21,8 +21,8 @@ class DataMengajar extends Migration
             $table->string('nm_mk')->nullable();
             $table->string('namapt')->nullable();
             $table->string('signature')->nullable();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('users_id');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

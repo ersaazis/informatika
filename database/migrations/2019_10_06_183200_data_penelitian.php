@@ -22,9 +22,9 @@ class DataPenelitian extends Migration
             $table->text('url')->nullable();
             $table->integer('titasi')->nullable();
             $table->text('url_titasi')->nullable();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('users_id');
             $table->string('signature')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

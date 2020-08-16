@@ -14,10 +14,11 @@ class ModifyUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('photo')->nullable();
-            $table->integer('cb_roles_id');
+            $table->unsignedInteger('cb_roles_id');
             $table->ipAddress("ip_address")->nullable();
             $table->string("user_agent")->nullable();
             $table->timestamp("login_at")->nullable();
+            $table->foreign('cb_roles_id')->references('id')->on('cb_roles')->onDelete('cascade');
         });
     }
 

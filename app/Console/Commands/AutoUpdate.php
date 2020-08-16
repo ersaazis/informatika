@@ -44,7 +44,7 @@ class AutoUpdate extends Command
         })->get();
         foreach($dosen as $d){
             Artisan::call('search:scholar', ['id' => $d->id]);
-            Artisan::call('search:diktiold', ['id' => $d->id]);    
+            Artisan::call('search:diktiold', ['id' => $d->id]);
         }
     }
 }

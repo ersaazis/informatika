@@ -171,7 +171,7 @@ class DiktiSearchOld extends Command
             }
             else {
                 $this->error('Data Tidak Ditemukan !');
-                $config['content'] = "(X) Berhasil Mendownload Data Forlap Untuk ID $id (silakan input id forlap secara manual)";
+                $config['content'] = "(X) Mendownload Data Forlap Untuk ID $id Gagal (silakan input id forlap secara manual)";
                 $config['url'] = cb()->getAdminUrl('notification');
             }
             if($id_user != 0){

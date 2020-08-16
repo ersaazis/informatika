@@ -124,9 +124,17 @@ class SchollarSearch extends Command
                     }
                 }
                 $query->update(['proses_update'=>0]);
+                $config['content'] = "(V) Berhasil Mendownload Data Schollar (".$name.')';
+                $config['url'] = cb()->getAdminUrl('notification');
             }
             else {
                 $this->error('Data Tidak Ditemukan !');
+                $config['content'] = "(X) Mendownload Data Schollar Untuk ID $id Gagal (silakan input id schollar secara manual)";
+                $config['url'] = cb()->getAdminUrl('notification');
+            }
+            if($id_user != 0){
+                $config['users_id']=$id_user;
+                cb()->addNotification($config);
             }
         }
     }

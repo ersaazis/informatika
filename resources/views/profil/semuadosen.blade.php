@@ -22,6 +22,7 @@
                 </div>
             @endforeach
             </div>
+            {{$dosen->links()}}
         </div>
     </div>
 @endsection

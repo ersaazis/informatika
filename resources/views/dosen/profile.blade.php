@@ -161,6 +161,7 @@
                 <div class="box-footer">
                     <div align="center">
                         <button class="btn btn-success" type="submit"><i class="fa fa-save"></i> {{ cbLang("update") }} {{ cbLang("profile") }}</button>
+                        <a class="btn btn-danger" href="javascript:;" onclick="goToUrlWithConfirmation('{{cb()->getAdminUrl('/profile/resetdata')}}','Data anda akan direset berdasarkan ID yang tersimpan di PUSAT DATA')"><i class="fa fa-refresh"></i> Reset Data</a>
                     </div>
                 </div>
             </div>

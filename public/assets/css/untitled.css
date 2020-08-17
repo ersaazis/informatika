@@ -9,3 +9,24 @@
   border: 1px solid rgba(145,196,72,1);
 }
 
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: rgba(145,196,72,1);
+  border-color: rgba(145,196,72,1);
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: .5rem .75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: rgba(145,196,72,1);
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+
+.page {
+  padding-top: 5rem;
+}

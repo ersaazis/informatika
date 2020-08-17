@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use ersaazis\cb\helpers\CurlHelper;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Image;
 use Storage;
 
 class SchollarSearch extends Command
@@ -91,6 +92,7 @@ class SchollarSearch extends Command
                         $urlFoto="https://scholar.google.com/citations?view_op=medium_photo&user=".$id_schollar;
                         $contents = file_get_contents($urlFoto);
                         Storage::disk('public')->put($id_schollar.".jpg", $contents);
+                        Image::make(storage_path('app/public/'.$id_schollar.".jpg"))->resize(192, 256)->save(storage_path('app/public/'.$id_schollar.".jpg"));
                         $query->update([
                             'photo'=>'storage/'.$id_schollar.".jpg",
                             'url_schollar'=>$url,

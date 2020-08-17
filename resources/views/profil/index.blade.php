@@ -1,0 +1,1 @@
+@extends('profil.layout.main')

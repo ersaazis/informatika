@@ -130,7 +130,7 @@ class SchollarSearch extends Command
             else {
                 $this->error('Data Tidak Ditemukan !');
                 $config['content'] = "(X) Mendownload Data Schollar Untuk ID $id Gagal (silakan input id schollar secara manual)";
-                $config['url'] = cb()->getAdminUrl('notification');
+                $config['url'] = cb()->getAdminUrl('users/edit/'.$id);
             }
             if($id_user != 0){
                 $config['users_id']=$id_user;

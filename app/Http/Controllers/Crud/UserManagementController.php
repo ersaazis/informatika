@@ -38,7 +38,7 @@ class UserManagementController extends \ersaazis\usermanagement\controllers\User
             $user['cb_roles_id'] = request('cb_roles_id');
             $id=DB::table('users')->insertGetId($user);
             if($user['cb_roles_id'] == 2)
-                SearchDosen::dispatch($id,cb()->session()->id())->onConnection('database');
+                SearchDosen::dispatch($id,cb()->session()->id())->onConnection('database')->onQueue('dataDosen');
             return cb()->redirect(route("UserManagementControllerGetIndex"),"New user has been created!","success");
 
         } catch (CBValidationException $e) {
@@ -103,12 +103,12 @@ class UserManagementController extends \ersaazis\usermanagement\controllers\User
         try {
             if(!$this->myPrivileges()->can_create) return cb()->redirect(cb()->getAdminUrl(),cbLang("you_dont_have_privilege_to_this_area"));
             if(!request('import')) return cb()->redirect(cb()->getAdminUrl(),cbLang("you_dont_have_privilege_to_this_area"));
-            
+
             $import=request('import')->store('tmp');
 
             $dataRaw=file_get_contents($import);
 
-            foreach(explode("\n",$dataRaw) as $key=>$item){
+            foreach(explode("\r\n",$dataRaw) as $key=>$item){
                 if($key == 0)
                     continue;
                 $dosen=explode(';',$item);
@@ -123,7 +123,7 @@ class UserManagementController extends \ersaazis\usermanagement\controllers\User
                     $user['cb_roles_id']=2;
                     $id=DB::table('users')->insertGetId($user);
                     if($id)
-                        SearchDosen::dispatch($id,cb()->session()->id())->onConnection('database');
+                        SearchDosen::dispatch($id,cb()->session()->id())->onConnection('database')->onQueue('dataDosen');
                 }
             }
             File::deleteDirectory(public_path('tmp'));

@@ -19,4 +19,7 @@ Route::get(cb()->getAdminPath().'/profile/resetdata', 'ProfilDosenController@res
 Route::group(['middleware' => ['web', \ersaazis\cb\middlewares\CBBackend::class], 'prefix' => cb()->getAdminPath()], function () {
     Route::get('/users/import', 'crud\UserManagementController@import');
     Route::post('/users/import/save', 'crud\UserManagementController@importSave');
+
+    Route::get('/cari_dokumen/dokumen/{id_dokumen}/{simpan}', 'AdminCariDokumenController@simpanDokumen');
+    Route::get('/dokumen_saya/hapus/{id_dokumen}', 'AdminDokumenSayaController@hapusDokumen');
 });

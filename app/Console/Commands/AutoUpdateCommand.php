@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Artisan;
 
-class AutoUpdate extends Command
+class AutoUpdateCommand extends Command
 {
     /**
      * The name and signature of the console command.

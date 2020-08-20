@@ -6,7 +6,7 @@ use ersaazis\cb\helpers\CurlHelper;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
-class DiktiSearchOld extends Command
+class DiktiSearchOldCommand extends Command
 {
     /**
      * The name and signature of the console command.

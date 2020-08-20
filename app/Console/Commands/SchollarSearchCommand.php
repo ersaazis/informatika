@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Image;
 use Storage;
 
-class SchollarSearch extends Command
+class SchollarSearchCommand extends Command
 {
     /**
      * The name and signature of the console command.

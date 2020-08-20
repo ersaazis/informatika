@@ -15,6 +15,7 @@ Route::get('/', 'ProfilDosenController@index');
 Route::get('/semua-dosen', 'ProfilDosenController@semuaDosen');
 Route::get('/cari', 'ProfilDosenController@cariDosen');
 Route::get('/dosen/{id}/{any}', 'ProfilDosenController@profilDosen');
+Route::get('/titasi-dosen/{id}', 'ProfilDosenController@getTitasi');
 Route::get(cb()->getAdminPath().'/profile/resetdata', 'ProfilDosenController@resetDataDosen');
 Route::group(['middleware' => ['web', \ersaazis\cb\middlewares\CBBackend::class], 'prefix' => cb()->getAdminPath()], function () {
     Route::get('/users/import', 'crud\UserManagementController@import');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SearchDosen;
+use ersaazis\cb\helpers\CurlHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -53,5 +54,16 @@ class ProfilDosenController extends Controller
             SearchDosen::dispatch($id,$id)->onConnection('database');
         }
         return cb()->redirect(cb()->getAdminUrl('profile'),'Proses Reset Data Kamu Sedang Dalam Antrian','success');
+    }
+    public function getTitasi($id){
+        $data=DB::table('data_penelitian')->find($id);
+        if($data){
+            $url = $data->url;
+            $request = new CurlHelper($url, "GET");
+            $request->headers(["Content-Type"=>"application/json"]);
+            $body = $request->send();
+            return $body;   
+        }
+        return false;
     }
 }

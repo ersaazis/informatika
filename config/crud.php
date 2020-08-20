@@ -5,7 +5,8 @@ return [
     /*
      * For security reason we have limit the upload file formats bellow
      */
-    'UPLOAD_FILE_EXTENSION_ALLOWED' => ['jpg','jpeg','png','gif','pdf','xls','xlsx','doc','docx','txt','zip','rar','rtf'],
+    // 'UPLOAD_FILE_EXTENSION_ALLOWED' => ['jpg','jpeg','png','gif','pdf','xls','xlsx','doc','docx','txt','zip','rar','rtf'],
+    'UPLOAD_FILE_EXTENSION_ALLOWED' => ['pdf'],
 
     'UPLOAD_IMAGE_EXTENSION_ALLOWED' => ['jpg','jpeg','png','gif'],
 

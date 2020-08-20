@@ -1,4 +1,3 @@
-@csrf
 <div class="modal fade" id="previewFile">
     <div class="modal-dialog">
         <div class="modal-content">

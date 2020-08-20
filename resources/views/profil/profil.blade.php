@@ -131,8 +131,8 @@
                                     @foreach ($riwayat_penelitian as $item)
                                     <tr>
                                         <td>{{$i++}}</td>
-                                        <td><a href="{{$item->url}}" target="_blank">{!! htmlspecialchars_decode($item->judul) !!}</a><br><small>{{$item->penulis}} <br> {{$item->publis}}</small></td>
-                                        <td><a href="{{$item->url}}" target="_blank">{{$item->titasi}}</a></td>
+                                        <td><a href="{{$item->url}}" class="preview" data-id="{{$item->id}}" target="_blank">{!! htmlspecialchars_decode($item->judul) !!}</a><br><small>{{$item->penulis}} <br> {{$item->publis}}</small></td>
+                                        <td><a href="{{$item->url}}" class="preview" data-id="{{$item->id}}" target="_blank">{{$item->titasi}}</a></td>
                                         <td>{{$item->tahun}}</td>
                                     </tr>
                                     @endforeach
@@ -213,11 +213,41 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="previewTitasi">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Preview Dokumen</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+            <div id="dataHTMLTitasi">
+                <center><div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div></center>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('script')
 <script>
     $(document).ready(function() {
+        $('.preview').click(function(e){
+            var id = $(this).attr('data-id');
+            $.get("{{url('/titasi-dosen')}}/"+id, function(data, status){
+                $('#dataHTMLTitasi').html(data);
+            });
+            $('#previewTitasi').modal('show');
+            return false;
+        });
+        $('#previewTitasi').on('hidden.bs.modal', function (e) {
+            $('#dataHTMLTitasi').html('<center><div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div></center>');
+        })
+
         $('.datatable').DataTable({
             "language":{
                 "url" : "//cdn.datatables.net/plug-ins/1.10.9/i18n/Indonesian.json",

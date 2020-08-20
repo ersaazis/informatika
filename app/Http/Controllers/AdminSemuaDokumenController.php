@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Jobs\PreprocessingPDF;
 use ersaazis\cb\controllers\CBController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,7 @@ class AdminSemuaDokumenController extends CBController {
         $this->setPageTitle("Semua Dokumen");
 
         $this->setButtonDetail(false);
+        $this->setButtonEdit(false);
 
         $this->addText("Nama Dokumen","name")->required(false)->showAdd(false)->showEdit(false)->strLimit(150)->maxLength(255);
 		$this->addFile("File","file")->showIndex(false)->encrypt(true);
@@ -62,6 +64,7 @@ class AdminSemuaDokumenController extends CBController {
                     $data['name']=$filename;
                     $data['file']=cb()->uploadFileProcess($filename, $ext, $file, true, null, null);
                     $id = DB::table($this->__call('getData',['table']))->insertGetId($data);
+                    PreprocessingPDF::dispatch($id)->onConnection('database')->onQueue('dataDokumen');
                 }
             }
         } catch (CBValidationException $e) {

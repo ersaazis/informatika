@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use File;
 use Illuminate\Support\Str;
 
-class UserManagementController extends \ersaazis\usermanagement\controllers\UserManagementController
+class UserManagementController extends \ersaazis\usermanagement\controllers\AdminUserManagementController
 {
     public function getIndex() {
         if(!$this->myPrivileges()->can_browse) return cb()->redirect(cb()->getAdminUrl(),cbLang("you_dont_have_privilege_to_this_area"));

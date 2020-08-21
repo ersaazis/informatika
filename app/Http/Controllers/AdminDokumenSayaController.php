@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\VSM;
 use ersaazis\cb\controllers\CBController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -27,6 +28,18 @@ class AdminDokumenSayaController extends CBController {
         $this->hookIndexQuery(function($query) {
             $query->join('dokumen_dosen', 'dokumen.id', '=', 'dokumen_dosen.dokumen_id');
             $query->where("dokumen_dosen.users_id", cb()->session()->id() );
+            return $query;
+        });
+
+        $this->hookSearchQuery(function($query, $keyword) {
+            $vsm=new VSM();
+            $dokumen=$vsm->search($keyword);
+            $query->where(function($q) use ($dokumen){
+                foreach($dokumen as $id=>$val){
+                    $q->orWhere('dokumen.id',$id);
+                }
+            });
+            // dd($query->toSql());
             return $query;
         });
 

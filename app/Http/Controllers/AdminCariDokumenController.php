@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\VSM;
 use ersaazis\cb\controllers\CBController;
 use Illuminate\Support\Facades\DB;
 
@@ -30,6 +31,19 @@ class AdminCariDokumenController extends CBController {
                 $checked='checked';
             return '<center><input type="checkbox" data-toggle="toggle" value="'.$row.'" '.$checked.' class="dokumensaya" /></center>';
         }); 
+
+        $this->hookSearchQuery(function($query, $keyword) {
+            $vsm=new VSM();
+            $dokumen=$vsm->search($keyword);
+            $query->where(function($q) use ($dokumen){
+                foreach($dokumen as $id=>$val){
+                    $q->orWhere('dokumen.id',$id);
+                }
+            });
+            // dd($query->toSql());
+            return $query;
+        });
+
         $this->addActionButton(null, function($row) {
 		    return url($row->file); 
         }, true, "fa fa-eye", 'primary preview', false);

@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Jobs\PreprocessingPDF;
+use App\VSM;
 use ersaazis\cb\controllers\CBController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -26,6 +27,18 @@ class AdminSemuaDokumenController extends CBController {
         $this->hookBeforeDelete(function($id) {
             $dokumen=DB::table('dokumen')->find($id);
             Storage::delete($dokumen->file);
+        });
+
+        $this->hookSearchQuery(function($query, $keyword) {
+            $vsm=new VSM();
+            $dokumen=$vsm->search($keyword);
+            $query->where(function($q) use ($dokumen){
+                foreach($dokumen as $id=>$val){
+                    $q->orWhere('dokumen.id',$id);
+                }
+            });
+            // dd($query->toSql());
+            return $query;
         });
 
         $this->addActionButton(null, function($row) {

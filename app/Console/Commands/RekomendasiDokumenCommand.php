@@ -40,33 +40,32 @@ class RekomendasiDokumenCommand extends Command
     public function handle()
     {
         $generate=DB::table('ir_config')->where(['key'=>'generated'])->first();
+        $vsm=new VSM();
         if(!$generate->value){
             DB::table('ir_config')->where(['key'=>'generated'])->update(['value'=>1]);
-
-            $vsm=new VSM();
             $vsm->vsm();
-            $dosen=DB::table('users')->where('cb_roles_id',2)->get();
-            foreach($dosen as $item){
-                $dokumen=$vsm->search($item->name);
-                if(count($dokumen)){
-                    $notif=false;
-                    foreach($dokumen as $id=>$num){
-                        $cek=DB::table('ir_dokumen_rekomendasi')->where('dokumen_id',$id)->count();
-                        if(!$cek){
-                            DB::table('ir_dokumen_rekomendasi')->insert([
-                                'dokumen_id'=>$id,
-                                'users_id'=>$item->id
-                            ]);
-                            $notif=true;
-                        }
-                    }
-                    if($notif)
-                        cb()->addNotification([
-                            'users_id'=>$item->id,
-                            'content'=>'Apakah dokumen ini milik anda?',
-                            'url'=>cb()->getAdminUrl('rekomendasi_dokumen')
+        }
+        $dosen=DB::table('users')->where('cb_roles_id',2)->get();
+        foreach($dosen as $item){
+            $dokumen=$vsm->search($item->name);
+            if(count($dokumen)){
+                $notif=false;
+                foreach($dokumen as $id=>$num){
+                    $cek=DB::table('ir_dokumen_rekomendasi')->where('dokumen_id',$id)->count();
+                    if(!$cek){
+                        DB::table('ir_dokumen_rekomendasi')->insert([
+                            'dokumen_id'=>$id,
+                            'users_id'=>$item->id
                         ]);
+                        $notif=true;
+                    }
                 }
+                if($notif)
+                    cb()->addNotification([
+                        'users_id'=>$item->id,
+                        'content'=>'Apakah dokumen ini milik anda?',
+                        'url'=>cb()->getAdminUrl('rekomendasi_dokumen')
+                    ]);
             }
         }
     }

@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\VSM;
 use ersaazis\cb\controllers\CBController;
 use Illuminate\Support\Facades\DB;
 
@@ -33,6 +34,18 @@ class AdminRekomendasiDokumenController extends CBController {
         }); 
 
         $this->addIndexActionButton("Reset Data",cb()->getAdminUrl('rekomendasi_dokumen').'/reset','fa fa-refresh','danger');
+
+        $this->hookSearchQuery(function($query, $keyword) {
+            $vsm=new VSM();
+            $dokumen=$vsm->search($keyword);
+            $query->where(function($q) use ($dokumen){
+                foreach($dokumen as $id=>$val){
+                    $q->orWhere('dokumen.id',$id);
+                }
+            });
+            // dd($query->toSql());
+            return $query;
+        });
 
         $this->hookIndexQuery(function($query) {
             $query->join('ir_dokumen_rekomendasi', 'dokumen.id', '=', 'ir_dokumen_rekomendasi.dokumen_id');

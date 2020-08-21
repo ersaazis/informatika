@@ -10,9 +10,9 @@ php -c php.ini composer-setup.php
 php -r "unlink('composer-setup.php');"
 php -c php.ini composer.phar install
 php artisan migrate
+mv app/Http/Controllersx app/Http/Controllers
 php -c php.ini composer.phar update
 php artisan crud:seed
-mv app/Http/Controllersx app/Http/Controllers
 php -r "unlink('composer.phar');"
 php artisan package:discover --ansi
 php artisan queue:work database --queue=dataDosen,dataDokumen

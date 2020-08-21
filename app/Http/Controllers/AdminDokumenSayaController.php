@@ -72,6 +72,8 @@ class AdminDokumenSayaController extends CBController {
                     DB::table('dokumen_dosen')->insert(['users_id'=>cb()->session()->id(),'dokumen_id'=>$id]);
                 }
             }
+            DB::table('ir_config')->where(['key'=>'generated'])->update(['value'=>0]);
+            
         } catch (CBValidationException $e) {
             Log::debug($e);
             return cb()->redirectBack($e->getMessage(),'info');

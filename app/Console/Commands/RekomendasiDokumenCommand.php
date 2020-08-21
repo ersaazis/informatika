@@ -39,9 +39,9 @@ class RekomendasiDokumenCommand extends Command
      */
     public function handle()
     {
-        $generate=DB::table('ir_config')->where(['generated'=>0])->first();
-        if($generate->generated){
-            DB::table('ir_config')->where(['generated'=>0])->update(['value'=>1]);
+        $generate=DB::table('ir_config')->where(['key'=>'generated'])->first();
+        if(!$generate->value){
+            DB::table('ir_config')->where(['key'=>'generated'])->update(['value'=>1]);
 
             $vsm=new VSM();
             $vsm->vsm();

@@ -41,7 +41,7 @@ class AdminRekomendasiDokumenController extends CBController {
             return $query;
         });
 
-        $this->setHeadScript('<link rel="stylesheet" href="http://localhost:8000/cb_asset/js/bootstrap-toggle/bootstrap-toggle.min.css">');
+        $this->setHeadScript('<link rel="stylesheet" href="'.url('/cb_asset/js/bootstrap-toggle/bootstrap-toggle.min.css').'">');
         $this->setBottomView('dokumen.preview');
 
         $this->addActionButton(null, function($row) {

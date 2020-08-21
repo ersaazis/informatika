@@ -16,7 +16,7 @@
         </div>
     </div>
 </div>
-<script src="http://localhost:8000/cb_asset/js/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+<script src="{{url('/cb_asset/js/bootstrap-toggle/bootstrap-toggle.min.js')}}"></script>
 <script>
     $('.dokumensaya').change(function(e){
         var thisClass = this;

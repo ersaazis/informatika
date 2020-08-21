@@ -67,6 +67,8 @@ class AdminSemuaDokumenController extends CBController {
                     PreprocessingPDF::dispatch($id)->onConnection('database')->onQueue('dataDokumen');
                 }
             }
+            DB::table('ir_config')->where(['key'=>'generated'])->update(['value'=>0]);
+
         } catch (CBValidationException $e) {
             Log::debug($e);
             return cb()->redirectBack($e->getMessage(),'info');

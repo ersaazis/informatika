@@ -33,7 +33,7 @@ class AdminCariDokumenController extends CBController {
         $this->addActionButton(null, function($row) {
 		    return url($row->file); 
         }, true, "fa fa-eye", 'primary preview', false);
-        $this->setHeadScript('<link rel="stylesheet" href="http://localhost:8000/cb_asset/js/bootstrap-toggle/bootstrap-toggle.min.css">');
+        $this->setHeadScript('<link rel="stylesheet" href="'.url('/cb_asset/js/bootstrap-toggle/bootstrap-toggle.min.css').'">');
         $this->setBottomView('dokumen.preview');
     }
     public function simpanDokumen($id_dokumen,$simpan){

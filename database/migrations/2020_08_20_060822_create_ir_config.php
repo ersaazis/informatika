@@ -20,7 +20,10 @@ class CreateIrConfig extends Migration
             $table->text('value');
             $table->timestamps();
         });
-        DB::table('ir_config')->insert(['generated'=>0]);
+        DB::table('ir_config')->insert([
+            'key'=>'generated',
+            'value'=>0
+        ]);
     }
 
     /**

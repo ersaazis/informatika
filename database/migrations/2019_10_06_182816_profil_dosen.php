@@ -71,7 +71,6 @@ class ProfilDosen extends Migration
             $table->dropColumn('id_scopus');
             $table->dropColumn('id_orchid');
 
-            $table->dropColumn('programstudi_id');
             $table->dropColumn('proses_update');
             $table->dropColumn('auto_update');
         });

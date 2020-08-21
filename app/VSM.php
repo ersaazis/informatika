@@ -1,48 +1,42 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App;
 
-use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Sastrawi\Stemmer\StemmerFactory;
 use Sastrawi\StopWordRemover\StopWordRemoverFactory;
 use Illuminate\Support\Str;
 
-class VSMSearch extends Command
+class VSM extends Model
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'vsm:search';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Command description';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
+    public function vsm(){
+        $dokumen=DB::table('dokumen')->where('preprocess',1)->get();
+        $d=count($dokumen);
+        $table=DB::table('ir_tf')->select(['*',DB::raw('sum(ir_tf.tf) as df')])->groupBy('ir_token_id')->get();
+        foreach($table as $item){
+            DB::table('ir_token')->where('id',$item->ir_token_id)->update([
+                'df'=>$item->df,
+                'd_df'=>$d/$item->df,
+                'idf'=>log10($d/$item->df),
+            ]);
+        }
+        $table=DB::table('ir_tf')->get();
+        foreach($table as $item){
+            $idf=DB::table('ir_token')->find($item->ir_token_id)->idf;
+            DB::table('ir_tf')->where('id',$item->id)->update([
+                'w'=>$idf*$item->tf,
+                'w2'=>pow($idf*$item->tf,2),
+            ]);
+        }
+        $table=DB::table('ir_tf')->select(['*',DB::raw('sum(w2) as sqrt')])->groupBy('dokumen_id')->get();
+        foreach($table as $item){
+            DB::table('dokumen')->where('id',$item->dokumen_id)->update([
+                'sqrt'=>sqrt($item->sqrt)
+            ]);
+        }
     }
-
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
-    public function handle()
-    {
-        $text="Information Retrieval";
-
+    public function search($text){
         // TOKENIZER
         $text=Str::lower($text);
         $text=str_replace('-',' ',$text);
@@ -82,7 +76,7 @@ class VSMSearch extends Command
             $dokumen=DB::table('ir_tf')
                 ->where('ir_token_id',$cek->id)
                 ->get();
-            // print_r($dokumen);
+            
             foreach($dokumen as $item){
                 $queryDokumen[$item->dokumen_id][$k]=$item->w2*$query[$k]['w2'];
                 if(empty($queryDokumen[$item->dokumen_id]['sum']))
@@ -95,11 +89,8 @@ class VSMSearch extends Command
         foreach($queryDokumen as $k=>$v){
             $dokumen=DB::table('dokumen')->find($k);
             $rank[$k]=$v['sum']/($dokumen->sqrt*$sqrtQ);
-            // $rank[$k]=number_format($rank[$k],8);
         }
         arsort($rank);
-        // RETURN
-        print_r($rank);
-        // print_r($query);        
+        return $rank;
     }
 }

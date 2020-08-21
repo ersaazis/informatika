@@ -23,4 +23,6 @@ Route::group(['middleware' => ['web', \ersaazis\cb\middlewares\CBBackend::class]
 
     Route::get('/cari_dokumen/dokumen/{id_dokumen}/{simpan}', 'AdminCariDokumenController@simpanDokumen');
     Route::get('/dokumen_saya/hapus/{id_dokumen}', 'AdminDokumenSayaController@hapusDokumen');
+    Route::get('/rekomendasi_dokumen/hapus/{id_dokumen}', 'AdminRekomendasiDokumenController@hapusDokumen');
+    Route::get('/rekomendasi_dokumen/reset', 'AdminRekomendasiDokumenController@resetDokumen');
 });

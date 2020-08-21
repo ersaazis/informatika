@@ -19,7 +19,7 @@ class CreateIrDokumenRekomendasi extends Migration
             $table->unsignedBigInteger('users_id');
             $table->foreign('dokumen_id')->references('id')->on('dokumen')->onDelete('cascade');
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
-            $table->boolean('vsm')->default(0);
+            $table->boolean('remove')->default(0);
             $table->timestamps();
         });
     }

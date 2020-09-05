@@ -11,17 +11,17 @@ class AdminCariDokumenController extends CBController {
     {
         $this->setTable("dokumen");
         $this->setPermalink("cari_dokumen");
-        $this->setPageTitle("Cari Dokumen");
+        $this->setPageTitle("Search Documents");
 
         $this->setButtonDelete(false);
         $this->setButtonEdit(false);
         $this->setButtonDetail(false);
         $this->setButtonAdd(false);
 
-        $this->addText("Nama Dokumen","name")->required(false)->showAdd(false)->showEdit(false)->strLimit(150)->maxLength(255);
+        $this->addText("Document Name","name")->required(false)->showAdd(false)->showEdit(false)->strLimit(150)->maxLength(255);
 		$this->addFile("File","file")->showIndex(false)->encrypt(true);
-		$this->addSelectTable("Kategori Dokumen","kategori_dokumen_id",["table"=>"kategori_dokumen","value_option"=>"id","display_option"=>"name","sql_condition"=>""])->filterable(true);
-        $this->addNumber('Dokumen Saya','id')->required(false)->showAdd(false)->showEdit(false)->indexDisplayTransform(function($row) {
+		$this->addSelectTable("Document Category","kategori_dokumen_id",["table"=>"kategori_dokumen","value_option"=>"id","display_option"=>"name","sql_condition"=>""])->filterable(true);
+        $this->addNumber('My Documents','id')->required(false)->showAdd(false)->showEdit(false)->indexDisplayTransform(function($row) {
             $data=[
                 'users_id'=>cb()->session()->id(),
                 'dokumen_id'=>$row
@@ -31,7 +31,11 @@ class AdminCariDokumenController extends CBController {
                 $checked='checked';
             return '<center><input type="checkbox" data-toggle="toggle" value="'.$row.'" '.$checked.' class="dokumensaya" /></center>';
         }); 
-
+        $this->addText("Upload by","upload_by")->required(false)->showAdd(false)->showEdit(false)->strLimit(150)->maxLength(255);
+        $this->hookIndexQuery(function($query) {
+            $query->where("dokumen.private", 0 );
+            return $query;
+        });
         $this->hookSearchQuery(function($query, $keyword) {
             $vsm=new VSM();
             $dokumen=$vsm->search($keyword);
@@ -51,7 +55,7 @@ class AdminCariDokumenController extends CBController {
         $this->setBottomView('dokumen.preview');
     }
     public function simpanDokumen($id_dokumen,$simpan){
-        if(!module()->canCreate()) return cb()->redirect(cb()->getAdminUrl(),cbLang("you_dont_have_privilege_to_this_area"));
+        if(!module()->canBrowse()) return cb()->redirect(cb()->getAdminUrl(),cbLang("you_dont_have_privilege_to_this_area"));
         $data=[
             'users_id'=>cb()->session()->id(),
             'dokumen_id'=>$id_dokumen

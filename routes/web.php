@@ -22,6 +22,7 @@ Route::group(['middleware' => ['web', \ersaazis\cb\middlewares\CBBackend::class]
     Route::post('/users/import/save', 'crud\UserManagementController@importSave');
 
     Route::get('/cari_dokumen/dokumen/{id_dokumen}/{simpan}', 'AdminCariDokumenController@simpanDokumen');
+    Route::get('/dokumen_saya/private/{id}/{jenis}', 'AdminDokumenSayaController@status');
     Route::get('/dokumen_saya/hapus/{id_dokumen}', 'AdminDokumenSayaController@hapusDokumen');
     Route::get('/rekomendasi_dokumen/hapus/{id_dokumen}', 'AdminRekomendasiDokumenController@hapusDokumen');
     Route::get('/rekomendasi_dokumen/reset', 'AdminRekomendasiDokumenController@resetDokumen');

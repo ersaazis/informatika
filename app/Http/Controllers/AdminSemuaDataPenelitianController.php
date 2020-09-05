@@ -9,14 +9,14 @@ class AdminSemuaDataPenelitianController extends CBController {
     {
         $this->setTable("data_penelitian");
         $this->setPermalink("semua_data_penelitian");
-        $this->setPageTitle("Semua Data Penelitian");
+        $this->setPageTitle("All Research Data");
 
-        $this->addText("Judul","judul")->filterable(true)->strLimit(150)->maxLength(255);
-		$this->addText("Penulis","penulis")->filterable(true)->strLimit(150)->maxLength(255);
-		$this->addText("Publis","publis")->filterable(true)->strLimit(150)->maxLength(255);
-		$this->addText("Tahun","tahun")->filterable(true)->strLimit(150)->maxLength(255);
-		$this->addText("Titasi","titasi")->filterable(true)->strLimit(150)->maxLength(255);
-		$this->addSelectTable("Dosen","users_id",["table"=>"users","value_option"=>"id","display_option"=>"name","sql_condition"=>"users.cb_roles_id=2"])->filterable(true);
+        $this->addText("Title","judul")->filterable(true)->strLimit(150)->maxLength(255);
+		$this->addText("Author","penulis")->filterable(true)->strLimit(150)->maxLength(255);
+		$this->addText("Publish","publis")->filterable(true)->strLimit(150)->maxLength(255);
+		$this->addText("Year","tahun")->filterable(true)->strLimit(150)->maxLength(255);
+		$this->addText("Citation","titasi")->filterable(true)->strLimit(150)->maxLength(255);
+		$this->addSelectTable("Lecturer","users_id",["table"=>"users","value_option"=>"id","display_option"=>"name","sql_condition"=>"users.cb_roles_id=2"])->filterable(true);
 		
 
     }

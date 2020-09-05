@@ -9,9 +9,9 @@ class AdminKategoriDokumenController extends CBController {
     {
         $this->setTable("kategori_dokumen");
         $this->setPermalink("kategori_dokumen");
-        $this->setPageTitle("Kategori Dokumen");
+        $this->setPageTitle("Document Category");
 
-        $this->addText("Nama","name")->strLimit(150)->maxLength(255);
+        $this->addText("Name","name")->strLimit(150)->maxLength(255);
 		
 
     }

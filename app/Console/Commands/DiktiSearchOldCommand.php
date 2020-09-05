@@ -153,7 +153,7 @@ class DiktiSearchOldCommand extends Command
                 }
                 if($id_user != 0)
                     $query->update([
-                        "name"=>$dataDosen['profil'][0],
+                        "name"=>ucwords( strtolower($dataDosen['profil'][0]) ),
                         "jenis_kelamin"=>$dataDosen['profil'][3],
                         "tmpt_lahir"=>NULL,
                         "namapt"=>$dataDosen['profil'][1],
@@ -166,12 +166,12 @@ class DiktiSearchOldCommand extends Command
                         "url_dikti"=>$url
                     ]);
                 $this->info('Data Ditemukan !');
-                $config['content'] = "(V) Berhasil Mendownload Data Forlap (".$dataDosen['profil'][0].')';
+                $config['content'] = "(V) Successfully Downloading Forlap Data (".$dataDosen['profil'][0].')';
                 $config['url'] = cb()->getAdminUrl('notification');    
             }
             else {
                 $this->error('Data Tidak Ditemukan !');
-                $config['content'] = "(X) Mendownload Data Forlap Untuk ID $id Gagal (silakan input id forlap secara manual)";
+                $config['content'] = "(X) Downloading Forlap Data For ID $id Failed (please input forlap id manually)";
                 $config['url'] = cb()->getAdminUrl('users/edit/'.$id);
             }
             if($id_user != 0){

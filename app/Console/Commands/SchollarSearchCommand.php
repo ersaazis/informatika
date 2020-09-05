@@ -113,8 +113,8 @@ class SchollarSearchCommand extends Command
                         }
                         DB::table('data_penelitian')->insert([
                             'url'=>str_replace("&amp;", "&","https://scholar.google.co.id".$karyaIlmiah[1][$i]),
-                            'judul'=>htmlspecialchars($karyaIlmiah[2][$i]),
-                            'penulis'=>htmlspecialchars($karyaIlmiah[3][$i]),
+                            'judul'=>ucwords( strtolower( htmlspecialchars($karyaIlmiah[2][$i]) ) ),
+                            'penulis'=>ucwords( strtolower( htmlspecialchars($karyaIlmiah[3][$i]) ) ),
                             'publis'=>htmlspecialchars(strip_tags($karyaIlmiah[4][$i])),
                             'url_titasi'=>$karyaIlmiah[5][$i],
                             'titasi'=>(int) $karyaIlmiah[6][$i],
@@ -122,16 +122,18 @@ class SchollarSearchCommand extends Command
                             "signature"=>$signature,
                             "users_id"=>$id,
                         ]);
+                        // exit();
+
                         $i++;
                     }
                 }
                 $query->update(['proses_update'=>0]);
-                $config['content'] = "(V) Berhasil Mendownload Data Schollar (".$name.')';
+                $config['content'] = "(V) Successfully Downloading Scholar Data (".$name.')';
                 $config['url'] = cb()->getAdminUrl('notification');
             }
             else {
                 $this->error('Data Tidak Ditemukan !');
-                $config['content'] = "(X) Mendownload Data Schollar Untuk ID $id Gagal (silakan input id schollar secara manual)";
+                $config['content'] = "(X) Downloading Scholar Data For ID $id Failed (please input scholar id manually)";
                 $config['url'] = cb()->getAdminUrl('users/edit/'.$id);
             }
             if($id_user != 0){

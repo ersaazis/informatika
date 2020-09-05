@@ -9,13 +9,13 @@ class AdminDataMengajarController extends CBController {
     {
         $this->setTable("data_mengajar");
         $this->setPermalink("data_mengajar");
-        $this->setPageTitle("Data Mengajar");
+        $this->setPageTitle("Teaching Data");
 
         $this->addText("Semester","id_smt")->filterable(true)->strLimit(150)->maxLength(255);
-		$this->addText("Nama Kelas","nm_kls")->filterable(true)->strLimit(150)->maxLength(255);
-		$this->addText("Kode Matkul","kode_mk")->filterable(true)->strLimit(150)->maxLength(255);
-		$this->addText("Nama Matkul","nm_mk")->filterable(true)->strLimit(150)->maxLength(255);
-        $this->addText("Nama Perguruan Tinggi","namapt")->filterable(true)->strLimit(150)->maxLength(255);
+		$this->addText("Class Name","nm_kls")->filterable(true)->strLimit(150)->maxLength(255);
+		$this->addText("Matkul Code","kode_mk")->filterable(true)->strLimit(150)->maxLength(255);
+		$this->addText("Course Name","nm_mk")->filterable(true)->strLimit(150)->maxLength(255);
+        $this->addText("Name of College","namapt")->filterable(true)->strLimit(150)->maxLength(255);
         $this->hookIndexQuery(function($query) {
             $query->where("users_id", cb()->session()->id());
             return $query;

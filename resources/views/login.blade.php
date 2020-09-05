@@ -1,4 +1,4 @@
-@extends('profil.layout.login')
+@extends('crud::themes.adminlte.layout.layout_login')
 @section('content')
 
     @if(!getSetting("login_logo"))
@@ -29,14 +29,14 @@
                 <div class="row">
                     @if(getSetting("enable_register"))
                         <div class="col-sm-6">
-                            <div align="left"><a style="text-decoration: underline" href="javascript:;" onclick="showRegister()">Tidak memiliki akun?</a></div>
+                            <div align="left"><a style="text-decoration: underline" href="javascript:;" onclick="showRegister()">Don't have an account?</a></div>
                         </div>
                     @endif
 
                     @if(getSetting("enable_forget"))
                     <div class="col-sm-6">
                         <div align="right">
-                            <a href="javascript:;" onclick="showForget()" style="text-decoration: underline">Lupa Password?</a>
+                            <a href="javascript:;" onclick="showForget()" style="text-decoration: underline">Forgot the password?</a>
                         </div>
                     </div>
                     @endif
@@ -53,7 +53,7 @@
             <label for="">Email</label>
             <input autocomplete='off' type="email" class="form-control" name='email' required placeholder="Masukkan email Anda yang terdaftar di sini"/>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
-            <div class="help-block">Pastikan email Anda terdaftar di sistem kami</div>
+            <div class="help-block">Make sure your email is registered in our system</div>
         </div>
         <div style="margin-bottom:10px" class='row'>
             <div class='col-xs-12'>
@@ -71,7 +71,7 @@
         <form id="form-register" style="display: none;" autocomplete='off' action="{{ route('AdminAuthControllerPostRegister') }}" method="post">
             {!! csrf_field() !!}
             <div class="form-group has-feedback">
-                <label for="">Nama</label>
+                <label for="">Name</label>
                 <input autocomplete='off' type="text" class="form-control" name='name' required />
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
@@ -90,10 +90,10 @@
 
             <div class="form-group has-feedback">
                 <label for="">Captcha</label>
-                <p>Berapa Hasil Penumlahan Dari {{ $no1 }} dan {{ $no2 }}</p>
+                <p>What is the Sum of {{ $no1 }} dan {{ $no2 }}</p>
                 <input autocomplete='off' type="text" placeholder="Masukkan Hasilnya Disini" class="form-control" name='captcha' required />
 
-                <div class="help-block">Isi Penjumlahan Diatas</div>
+                <div class="help-block">Fill in the Addition Above</div>
             </div>
             <div style="margin-bottom:10px" class='row'>
                 <div class='col-xs-12'>

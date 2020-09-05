@@ -14,8 +14,8 @@ class ProfilDosen extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('nip')->nullable();
-            $table->integer('nidn')->nullable();
+            $table->string('nip')->nullable();
+            $table->string('nidn')->nullable();
         	$table->string('jenis_kelamin')->nullable();
             $table->date('tanggal_lahir')->nullable();
         	$table->string('tmpt_lahir')->nullable();

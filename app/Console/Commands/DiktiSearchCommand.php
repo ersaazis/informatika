@@ -123,12 +123,12 @@ class DiktiSearchCommand extends Command
                         "id_dikti"=>$id_dikti,
                         "url_dikti"=>$url,
                     ]);
-                $config['content'] = "(V) Berhasil Mendownload Data Forlap (".$content['dataumum']['nm_sdm'].')';
+                $config['content'] = "(V) Successfully Downloading Forlap Data (".$content['dataumum']['nm_sdm'].')';
                 $config['url'] = cb()->getAdminUrl('notification');
             }
             else{
                 $this->error('Data Tidak Ditemukan !');
-                $config['content'] = "(X) Mendownload Data Forlap Untuk ID $id Gagal (silakan input id forlap secara manual)";
+                $config['content'] = "(X) Downloading Forlap Data For ID $id Failed (please input forlap id manually)";
                 $config['url'] = cb()->getAdminUrl('users/edit/'.$id);
             }
             if($id_user != 0){

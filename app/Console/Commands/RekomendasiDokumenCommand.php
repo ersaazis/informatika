@@ -63,7 +63,7 @@ class RekomendasiDokumenCommand extends Command
                 if($notif)
                     cb()->addNotification([
                         'users_id'=>$item->id,
-                        'content'=>'Apakah dokumen ini milik anda?',
+                        'content'=>'Is this your documents?',
                         'url'=>cb()->getAdminUrl('rekomendasi_dokumen')
                     ]);
             }

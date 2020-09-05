@@ -2,6 +2,7 @@
 
 use App\VSM;
 use ersaazis\cb\controllers\CBController;
+use ersaazis\cb\exceptions\CBValidationException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Log;
@@ -15,15 +16,30 @@ class AdminDokumenSayaController extends CBController {
     {
         $this->setTable("dokumen");
         $this->setPermalink("dokumen_saya");
-        $this->setPageTitle("Dokumen Saya");
+        $this->setPageTitle("My Documents");
 
         $this->setButtonDelete(false);
         $this->setButtonEdit(false);
         $this->setButtonDetail(false);
 
-        $this->addText("Nama Dokumen","name")->required(false)->showAdd(false)->showEdit(false)->strLimit(150)->maxLength(255);
+        $this->addText("My Documents","name")->required(false)->showAdd(false)->showEdit(false)->strLimit(150)->maxLength(255);
 		$this->addFile("File","file")->showIndex(false)->encrypt(true);
-		$this->addSelectTable("Kategori Dokumen","kategori_dokumen_id",["table"=>"kategori_dokumen","value_option"=>"id","display_option"=>"name","sql_condition"=>""])->filterable(true);
+		$this->addSelectTable("Document Category","kategori_dokumen_id",["table"=>"kategori_dokumen","value_option"=>"id","display_option"=>"name","sql_condition"=>""])->filterable(true);
+        $this->addText("Upload by","upload_by")->required(false)->showAdd(false)->showEdit(false)->strLimit(150)->maxLength(255);
+        $this->addSelectOption("Private","private",[0,1])->showIndex(false);
+        $this->addNumber('Private','id')->required(false)->showAdd(false)->showEdit(false)->indexDisplayTransform(function($row) {
+            $cek=DB::table('dokumen')->where([
+                'users_id'=>cb()->session()->id(),
+                'id'=>$row
+            ])->first();
+            if($cek){
+                $checked="";
+                if($cek->private == 1)
+                    $checked='checked';
+                return '<center><input type="checkbox" data-toggle="toggle" value="'.$row.'" '.$checked.' class="private" /></center>';
+            }
+        }); 
+        $this->setHeadScript('<link rel="stylesheet" href="'.url('/cb_asset/js/bootstrap-toggle/bootstrap-toggle.min.css').'">');
         
         $this->hookIndexQuery(function($query) {
             $query->join('dokumen_dosen', 'dokumen.id', '=', 'dokumen_dosen.dokumen_id');
@@ -79,6 +95,9 @@ class AdminDokumenSayaController extends CBController {
                 $filename = $file->getClientOriginalName();
                 $ext = strtolower($file->getClientOriginalExtension());
                 if($filename && $ext) {
+                    $data['users_id']=cb()->session()->id();
+                    $data['private']=request('private');
+                    $data['upload_by']=cb()->session()->name();
                     $data['name']=$filename;
                     $data['file']=cb()->uploadFileProcess($filename, $ext, $file, true, null, null);
                     $id = DB::table($this->__call('getData',['table']))->insertGetId($data);
@@ -114,5 +133,13 @@ class AdminDokumenSayaController extends CBController {
         ];
         DB::table('dokumen_dosen')->where($data)->delete();
         return cb()->redirectBack( cbLang("the_data_has_been_deleted"), 'success');
+    }
+    public function status($id,$jenis){
+        if(!module()->canCreate()) return cb()->redirect(cb()->getAdminUrl(),cbLang("you_dont_have_privilege_to_this_area"));
+        if($jenis == 'true'){
+            $jenis=1;
+        } else $jenis=0;
+        DB::table('dokumen')->where(['id'=>$id,'users_id'=>cb()->session()->id()])->update(['private'=>$jenis]);
+        return cb()->redirectBack( cbLang("the_data_has_been_updated"), 'success');
     }
 }

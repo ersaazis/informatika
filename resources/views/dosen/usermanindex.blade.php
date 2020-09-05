@@ -4,8 +4,8 @@
 
     <p>
         <a href="{{ route('UserManagementControllerGetAdd') }}" class="btn btn-primary"><i class="fa fa-plus"></i> {{ cbLang('add') }} User</a>
-        <a href="{{ cb()->getAdminUrl('users/import') }}" class="btn btn-success"><i class="fa fa-upload"></i> Import Dosen</a>
-        <a href="{{ url('import.csv') }}" class="btn btn-success"><i class="fa fa-download"></i> Format Import</a>
+        <a href="{{ cb()->getAdminUrl('users/import') }}" class="btn btn-success"><i class="fa fa-upload"></i> Import Lecturer</a>
+        <a href="{{ url('import.csv') }}" class="btn btn-success"><i class="fa fa-download"></i> Import Format</a>
     </p>
 
     <div class="box box-default">

@@ -11,18 +11,18 @@ class AdminRekomendasiDokumenController extends CBController {
     {
         $this->setTable("dokumen");
         $this->setPermalink("rekomendasi_dokumen");
-        $this->setPageTitle("Rekomendasi Dokumen");
+        $this->setPageTitle("Document Recommendations");
 
         $this->setButtonAdd(false);
         $this->setButtonDelete(false);
         $this->setButtonEdit(false);
         $this->setButtonDetail(false);
 
-        $this->addText("Nama Dokumen","name")->required(false)->showAdd(false)->showEdit(false)->strLimit(150)->maxLength(255);
+        $this->addText("My Documents","name")->required(false)->showAdd(false)->showEdit(false)->strLimit(150)->maxLength(255);
 		$this->addFile("File","file")->showIndex(false)->encrypt(true);
-		$this->addSelectTable("Kategori Dokumen","kategori_dokumen_id",["table"=>"kategori_dokumen","value_option"=>"id","display_option"=>"name","sql_condition"=>""])->filterable(true);
+		$this->addSelectTable("Document Category","kategori_dokumen_id",["table"=>"kategori_dokumen","value_option"=>"id","display_option"=>"name","sql_condition"=>""])->filterable(true);
         
-        $this->addNumber('Dokumen Saya','id')->required(false)->showAdd(false)->showEdit(false)->indexDisplayTransform(function($row) {
+        $this->addNumber('My Documents','id')->required(false)->showAdd(false)->showEdit(false)->indexDisplayTransform(function($row) {
             $data=[
                 'users_id'=>cb()->session()->id(),
                 'dokumen_id'=>$row
@@ -32,9 +32,13 @@ class AdminRekomendasiDokumenController extends CBController {
                 $checked='checked';
             return '<center><input type="checkbox" data-toggle="toggle" value="'.$row.'" '.$checked.' class="dokumensaya" /></center>';
         }); 
+        $this->addText("Upload by","upload_by")->required(false)->showAdd(false)->showEdit(false)->strLimit(150)->maxLength(255);
 
         $this->addIndexActionButton("Reset Data",cb()->getAdminUrl('rekomendasi_dokumen').'/reset','fa fa-refresh','danger');
-
+        $this->hookIndexQuery(function($query) {
+            $query->where("dokumen.private", 0 );
+            return $query;
+        });
         $this->hookSearchQuery(function($query, $keyword) {
             $vsm=new VSM();
             $dokumen=$vsm->search($keyword);

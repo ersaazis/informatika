@@ -10,12 +10,12 @@ class AdminDataPendidikanController extends CBController {
     {
         $this->setTable("data_pendidikan");
         $this->setPermalink("data_pendidikan");
-        $this->setPageTitle("Data Pendidikan");
+        $this->setPageTitle("Education Data");
 
-        $this->addText("Tahun Lulus","thn_lulus")->filterable(true)->strLimit(150)->maxLength(255);
-		$this->addText("Perguruan Tinggi","nm_sp_formal")->filterable(true)->strLimit(150)->maxLength(255);
-		$this->addText("Jenjang","namajenjang")->filterable(true)->strLimit(150)->maxLength(255);
-        $this->addText("Gelar","singkat_gelar")->filterable(true)->strLimit(150)->maxLength(255);
+        $this->addText("Graduation year","thn_lulus")->filterable(true)->strLimit(150)->maxLength(255);
+		$this->addText("College","nm_sp_formal")->filterable(true)->strLimit(150)->maxLength(255);
+		$this->addText("Educational Stage","namajenjang")->filterable(true)->strLimit(150)->maxLength(255);
+        $this->addText("Degree","singkat_gelar")->filterable(true)->strLimit(150)->maxLength(255);
         $this->hookIndexQuery(function($query) {
             $query->where("users_id", cb()->session()->id());
             return $query;

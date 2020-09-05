@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers\Crud;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AdminProfileController extends \ersaazis\cb\controllers\AdminProfileController {
     public function getIndex() {
@@ -28,13 +30,13 @@ class AdminProfileController extends \ersaazis\cb\controllers\AdminProfileContro
                 $data['password'] = Hash::make(request('password'));
             }
             if(request()->hasFile('photo')) {
-                $data['photo'] = cb()->uploadFile('photo', true, 200, 200);
+                $data['photo'] = cb()->uploadFile('photo', true, 192, 256, 'image');
             }
             if(cb()->session()->roleId() == 2){
                 $data['nip']=request('nip');
                 $data['nidn']=request('nidn');
                 $data['jenis_kelamin']=request('jenis_kelamin');
-                $data['tanggal_lahir']=request('tanggal_lahir');
+                $data['tanggal_lahir']=substr(request('nip'),0,4)."-".substr(request('nip'),4,2)."-".substr(request('nip'),6,2);
                 $data['tmpt_lahir']=request('tmpt_lahir');
                 $data['namapt']=request('namapt');
                 $data['namaprodi']=request('namaprodi');

@@ -14,13 +14,13 @@ class ProfilDosenController extends Controller
     private $showData=8;
     public function index(){
         $data = [];
-        $data['page_title'] = "Profil Dosen Informatika - ".cb()->getAppName();
+        $data['page_title'] = "Informatics Engineering Majoring Profile - ".cb()->getAppName();
         $data['dosen']=DB::table('users')->where('cb_roles_id',2)->inRandomOrder()->limit($this->showData)->get();
         return view('profil.index', $data);
     }
     public function semuaDosen(){
         $data = [];
-        $data['page_title'] = "Profil Dosen Informatika - ".cb()->getAppName();
+        $data['page_title'] = "Informatics Engineering Majoring Profile - ".cb()->getAppName();
         $data['dosen']=DB::table('users')->where('cb_roles_id',2)->paginate($this->showData);
         return view('profil.semuadosen', $data);
     }

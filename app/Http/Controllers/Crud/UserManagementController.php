@@ -16,6 +16,27 @@ use Illuminate\Support\Str;
 
 class UserManagementController extends \ersaazis\usermanagement\controllers\AdminUserManagementController
 {
+    public function myPrivileges(){
+        if(cb()->session()->id()){
+            $menu = cb()->find("cb_menus",[
+                "type"=>'path',
+                "name"=>'User Management'
+            ]);
+            $privilege = cb()->find("cb_role_privileges",[
+                "cb_menus_id"=>$menu->id,
+                "cb_roles_id"=>cb()->session()->roleId()
+            ]);
+            return $privilege;    
+        }
+        $privilege=[];
+        $privilege->can_browse=false;
+        $privilege->can_create=false;
+        $privilege->can_read=false;
+        $privilege->can_update=false;
+        $privilege->can_delete=false;
+        return false;
+    }
+
     public function getIndex() {
         if(!$this->myPrivileges()->can_browse) return cb()->redirect(cb()->getAdminUrl(),cbLang("you_dont_have_privilege_to_this_area"));
         $data = [];

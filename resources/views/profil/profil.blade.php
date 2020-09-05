@@ -14,8 +14,8 @@
             <div class="col col-md-6 col-lg-6 col-12">
                 <p>NIP. {{$dosen->nip}}<br>NIDN. {{$dosen->nidn}}</p>
                 <p><i class="fa fa-envelope"></i>&nbsp;Email : {{$dosen->email}}</p>
-                <p>Bidang Keahlian : {{$dosen->bidang_keahlian}}</p>
-                <a href="#detail" data-toggle="modal" data-target="#detail" target="_blank" class="btn btn-light btn-block btn-sm text-left border rounded">Detail Profile</a>
+                <p>Areas of expertise : {{$dosen->bidang_keahlian}}</p>
+                <a href="#detail" data-toggle="modal" data-target="#detail" target="_blank" class="btn btn-light btn-block btn-sm text-left border rounded">Detailed Profile</a>
                 @if ($dosen->id_dikti)
                 <a href="https://forlap.ristekdikti.go.id/dosen/detail/{{$dosen->id_dikti}}" target="_blank" class="btn btn-secondary btn-block btn-sm text-left border rounded">Forlap Dikti</a>
                 @endif
@@ -34,9 +34,9 @@
             <div class="col col-md-9 col-lg-9 col-12">
                 <div>
                     <ul class="nav nav-pills nav-fill mb-3">
-                        <li class="nav-item"><a class="nav-link text-secondary" role="tab" data-toggle="pill" href="#tab-1" aria-selected="false">Riwayat Pendidikan</a></li>
-                        <li class="nav-item"><a class="nav-link text-secondary active" role="tab" data-toggle="pill" href="#tab-2" aria-selected="true">Riwayat Mengajar</a></li>
-                        <li class="nav-item"><a class="nav-link text-secondary" role="tab" data-toggle="pill" href="#tab-3" aria-selected="false">Penelitian</a></li>
+                        <li class="nav-item"><a class="nav-link text-secondary" role="tab" data-toggle="pill" href="#tab-1" aria-selected="false">Educational History</a></li>
+                        <li class="nav-item"><a class="nav-link text-secondary active" role="tab" data-toggle="pill" href="#tab-2" aria-selected="true">Teaching History</a></li>
+                        <li class="nav-item"><a class="nav-link text-secondary" role="tab" data-toggle="pill" href="#tab-3" aria-selected="false">Research</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade" role="tabpanel" id="tab-1">
@@ -44,10 +44,10 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Perguruan Tinggi</th>
-                                        <th>Gelar Akademik</th>
-                                        <th>Tanggal Ijazah</th>
-                                        <th>Jenjang</th>
+                                        <th>College</th>
+                                        <th>Academic Degree</th>
+                                        <th>Date of Diploma</th>
+                                        <th>Educational Stage</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,10 +67,10 @@
                                 <tfoot>
                                     <tr>
                                         <th>No</th>
-                                        <th>Perguruan Tinggi</th>
-                                        <th>Gelar Akademik</th>
-                                        <th>Tanggal Ijazah</th>
-                                        <th>Jenjang</th>
+                                        <th>College</th>
+                                        <th>Academic Degree</th>
+                                        <th>Date of Diploma</th>
+                                        <th>Educational Stage</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -81,10 +81,10 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Semester</th>
-                                        <th>Kode Matkul</th>
-                                        <th>Nama Matkul</th>
-                                        <th>Kelas</th>
-                                        <th>Perguruan Tinggi</th>
+                                        <th>Course Code</th>
+                                        <th>Course Name</th>
+                                        <th>Class</th>
+                                        <th>College</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -106,10 +106,10 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Semester</th>
-                                        <th>Kode Matkul</th>
-                                        <th>Nama Matkul</th>
-                                        <th>Kelas</th>
-                                        <th>Perguruan Tinggi</th>
+                                        <th>Course Code</th>
+                                        <th>Course Name</th>
+                                        <th>Class</th>
+                                        <th>College</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -119,9 +119,9 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Judul</th>
-                                        <th>Sitasi</th>
-                                        <th>Tahun</th>
+                                        <th>Title</th>
+                                        <th>Citations</th>
+                                        <th>Year</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -140,9 +140,9 @@
                                 <tfoot>
                                     <tr>
                                         <th>No</th>
-                                        <th>Judul</th>
-                                        <th>Sitasi</th>
-                                        <th>Tahun</th>
+                                        <th>Title</th>
+                                        <th>Citations</th>
+                                        <th>Year</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -169,40 +169,40 @@
                         <td>{{$dosen->nidn}}</td>
                     </tr>
                     <tr>
-                        <th>Jenis Kelamin</th>
+                        <th>Gender</th>
                         <td>{{$dosen->jenis_kelamin}}</td>
                     </tr>
                     <tr>
-                        <th>Tanggal Lahir</th>
+                        <th>Date of birth</th>
                         <td>{{$dosen->tanggal_lahir}}</td>
                     </tr>
                     <tr>
                     <tr>
-                        <th>Tempat Lahir</th>
+                        <th>Place of birth</th>
                         <td>{{$dosen->tmpt_lahir}}</td>
                     </tr>
                     <tr>
-                        <th>Status Keaktifan</th>
+                        <th>Active Status</th>
                         <td>{{$dosen->statuskeaktifan}}</td>
                     </tr>
                     <tr>
-                        <th>Pendidikan Tertinggi</th>
+                        <th>Highest Education</th>
                         <td>{{$dosen->pend_tinggi}}</td>
                     </tr>
                     <tr>
-                        <th>Fungsional</th>
+                        <th>Functional</th>
                         <td>{{$dosen->fungsional}}</td>
                     </tr>
                     <tr>
-                        <th>Ikatan Kerja</th>
+                        <th>Work Bonds</th>
                         <td>{{$dosen->ikatankerja}}</td>
                     </tr>
                     <tr>
-                        <th>Bidang Keahlian</th>
+                        <th>Areas of Expertise</th>
                         <td>{{$dosen->bidang_keahlian}}</td>
                     </tr>
                     <tr>
-                        <th colspan="2">Alamat</th>
+                        <th colspan="2">Address</th>
                     </tr>
                     <tr>
                         <td colspan="2">{{$dosen->alamat}}</td>
@@ -217,7 +217,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title">Preview Dokumen</h4>
+            <h4 class="modal-title">Document Preview</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
         </div>

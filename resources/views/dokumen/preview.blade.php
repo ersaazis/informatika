@@ -4,7 +4,7 @@
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Preview Dokumen</h4>
+            <h4 class="modal-title">Document Preview</h4>
         </div>
         <div class="modal-body">
             <iframe style="height:70vh; width:100%; border:none; margin:0; padding:0; overflow:hidden;" src="" id='frameDokumen'></iframe>
@@ -22,14 +22,23 @@
         var thisClass = this;
         var id = $(this).val();
         var url = "{{cb()->getAdminUrl('/cari_dokumen/dokumen/')}}/"+id+"/"+$(this).prop('checked');
-        // console.log(url);
+        console.log(url);
         $.get(url).fail(function(e) {
-            alert( "Terdapat Ganguan Koneksi" );
+            alert( "There is a connection failure" );
+        });
+    });
+    $('.private').change(function(e){
+        var thisClass = this;
+        var id = $(this).val();
+        var url = "{{cb()->getAdminUrl('/dokumen_saya/private/')}}/"+id+"/"+$(this).prop('checked');
+        console.log(url);
+        $.get(url).fail(function(e) {
+            alert( "There is a connection failure" );
         });
     });
     $('[data-toggle="toggle"]').bootstrapToggle({
-        on: 'Ya',
-        off: 'Bukan'
+        on: 'Yes',
+        off: 'No'
     });
     $('.preview').click(function(e){
         var href = $(this).attr('href');

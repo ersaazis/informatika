@@ -7,10 +7,10 @@
     <title>{{$page_title}}</title>
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:description" content="Informasi profil dosen di Teknik Informatika Universitas Islam Negeri Sunan Gunung Djati Bandung.">
+    <meta name="twitter:description" content="Information Majoring in Informatics Engineering, Sunan Gunung Djati State Islamic University, Bandung.">
     <meta property="og:image" content="assets/img/icon.png">
-    <meta name="description" content="Informasi profil dosen di Teknik Informatika Universitas Islam Negeri Sunan Gunung Djati Bandung.">
-    <meta name="twitter:title" content="Profile Dosen Jurusan Teknik Informatika">
+    <meta name="description" content="Information Majoring in Informatics Engineering, Sunan Gunung Djati State Islamic University, Bandung.">
+    <meta name="twitter:title" content="Informatics Engineering Majoring Profile">
     <link rel="icon" type="image/png" sizes="170x170" href="{{url('/')}}/assets/img/icon.png">
     <link rel="icon" type="image/png" sizes="170x170" href="{{url('/')}}/assets/img/icon.png">
     <link rel="icon" type="image/png" sizes="170x170" href="{{url('/')}}/assets/img/icon.png">
@@ -35,8 +35,8 @@
                 class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{url('/')}}/">Home</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="{{url('/semua-dosen')}}/">Semua Dosen</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#caridosen" data-toggle="modal" data-target="#caridosen">CARI DOSEN</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{{url('/semua-dosen')}}/">All Lecturers</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#caridosen" data-toggle="modal" data-target="#caridosen">Find a Lecturer</a></li>
                     @if (cb()->session()->id())
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{url('/admin')}}/">Admin</a></li>
                     @else

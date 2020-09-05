@@ -10,15 +10,15 @@ class AdminDataPenelitianController extends CBController {
     {
         $this->setTable("data_penelitian");
         $this->setPermalink("data_penelitian");
-        $this->setPageTitle("Data Penelitian");
+        $this->setPageTitle("Research data");
 
-        $this->addText("Judul","judul")->filterable(true)->strLimit(150)->maxLength(255);
-		$this->addText("Penulis","penulis")->filterable(true)->strLimit(150)->maxLength(255);
-		$this->addText("Publis","publis")->filterable(true)->strLimit(150)->maxLength(255);
-		$this->addText("Tahun","tahun")->filterable(true)->strLimit(150)->maxLength(255);
+        $this->addText("Title","judul")->filterable(true)->strLimit(150)->maxLength(255);
+		$this->addText("Author","penulis")->filterable(true)->strLimit(150)->maxLength(255);
+		$this->addText("Publish","publis")->filterable(true)->strLimit(150)->maxLength(255);
+		$this->addText("Year","tahun")->filterable(true)->strLimit(150)->maxLength(255);
 		$this->addText("Url","url")->showIndex(false)->strLimit(150)->maxLength(255);
-		$this->addText("Titasi","titasi")->strLimit(150)->maxLength(255);
-        $this->addText("Url Titasi","url_titasi")->showIndex(false)->strLimit(150)->maxLength(255);
+		$this->addText("Citation","titasi")->strLimit(150)->maxLength(255);
+        $this->addText("Citation Url","url_titasi")->showIndex(false)->strLimit(150)->maxLength(255);
         $this->hookIndexQuery(function($query) {
             $query->where("users_id", cb()->session()->id());
             return $query;

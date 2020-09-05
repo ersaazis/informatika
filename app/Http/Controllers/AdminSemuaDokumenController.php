@@ -3,6 +3,7 @@
 use App\Jobs\PreprocessingPDF;
 use App\VSM;
 use ersaazis\cb\controllers\CBController;
+use ersaazis\cb\exceptions\CBValidationException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Log;
@@ -16,19 +17,23 @@ class AdminSemuaDokumenController extends CBController {
     {
         $this->setTable("dokumen");
         $this->setPermalink("semua_dokumen");
-        $this->setPageTitle("Semua Dokumen");
+        $this->setPageTitle("All Documents");
 
         $this->setButtonDetail(false);
         $this->setButtonEdit(false);
 
-        $this->addText("Nama Dokumen","name")->required(false)->showAdd(false)->showEdit(false)->strLimit(150)->maxLength(255);
+        $this->addText("My Documents","name")->required(false)->showAdd(false)->showEdit(false)->strLimit(150)->maxLength(255);
 		$this->addFile("File","file")->showIndex(false)->encrypt(true);
-        $this->addSelectTable("Kategori Dokumen","kategori_dokumen_id",["table"=>"kategori_dokumen","value_option"=>"id","display_option"=>"name","sql_condition"=>""])->filterable(true);
+        $this->addSelectTable("Document Category","kategori_dokumen_id",["table"=>"kategori_dokumen","value_option"=>"id","display_option"=>"name","sql_condition"=>""])->filterable(true);
+        $this->addText("Upload by","upload_by")->required(false)->showAdd(false)->showEdit(false)->strLimit(150)->maxLength(255);
         $this->hookBeforeDelete(function($id) {
             $dokumen=DB::table('dokumen')->find($id);
             Storage::delete($dokumen->file);
         });
-
+        $this->hookIndexQuery(function($query) {
+            $query->where("dokumen.private", 0 );
+            return $query;
+        });
         $this->hookSearchQuery(function($query, $keyword) {
             $vsm=new VSM();
             $dokumen=$vsm->search($keyword);
@@ -74,6 +79,9 @@ class AdminSemuaDokumenController extends CBController {
                 $filename = $file->getClientOriginalName();
                 $ext = strtolower($file->getClientOriginalExtension());
                 if($filename && $ext) {
+                    $data['private']=request('private');
+                    $data['users_id']=cb()->session()->id();
+                    $data['upload_by']=cb()->session()->name();
                     $data['name']=$filename;
                     $data['file']=cb()->uploadFileProcess($filename, $ext, $file, true, null, null);
                     $id = DB::table($this->__call('getData',['table']))->insertGetId($data);

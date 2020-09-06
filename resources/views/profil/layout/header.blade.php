@@ -7,10 +7,10 @@
     <title>{{$page_title}}</title>
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:description" content="Information Majoring in Informatics Engineering, Sunan Gunung Djati State Islamic University, Bandung.">
+    <meta name="twitter:description" content="Information Department in Informatics Engineering, Sunan Gunung Djati State Islamic University, Bandung.">
     <meta property="og:image" content="assets/img/icon.png">
-    <meta name="description" content="Information Majoring in Informatics Engineering, Sunan Gunung Djati State Islamic University, Bandung.">
-    <meta name="twitter:title" content="Informatics Engineering Majoring Profile">
+    <meta name="description" content="Information Department in Informatics Engineering, Sunan Gunung Djati State Islamic University, Bandung.">
+    <meta name="twitter:title" content="Informatics Engineering Department Profile">
     <link rel="icon" type="image/png" sizes="170x170" href="{{url('/')}}/assets/img/icon.png">
     <link rel="icon" type="image/png" sizes="170x170" href="{{url('/')}}/assets/img/icon.png">
     <link rel="icon" type="image/png" sizes="170x170" href="{{url('/')}}/assets/img/icon.png">
@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="{{url('/')}}/assets/css/smoothproducts.css">
     <link rel="stylesheet" href="{{url('/')}}/assets/css/untitled.css">
+    @stack('head')
 </head>
 
 <body>

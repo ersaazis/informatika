@@ -29,8 +29,10 @@
                         <td>{{ $row->email }}</td>
                         <td>{{ $row->cb_roles_name }}</td>
                         <td>
+                            @if ($row->id!=1)
                             <a href="{{ cb()->getAdminUrl("users/edit/".$row->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             <a href="{{ cb()->getAdminUrl("users/delete/".$row->id)}}" onclick="if(!confirm('Are you sure want to delete?')) return false" class="btn btn-danger btn-sm">Delete</a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach

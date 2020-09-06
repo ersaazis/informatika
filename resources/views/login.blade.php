@@ -13,12 +13,12 @@
         {!! csrf_field() !!}
         <div class="form-group has-feedback">
             <label for="">Email</label>
-            <input autocomplete='off' type="email" class="form-control" name='email' required placeholder="Masukan Email"/>
+            <input autocomplete='off' type="email" class="form-control" name='email' required placeholder="Enter your Email"/>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
             <label for="">Password</label>
-            <input autocomplete='off' type="password" class="form-control" name='password' required placeholder="Msukan Password"/>
+            <input autocomplete='off' type="password" class="form-control" name='password' required placeholder="Enter your password"/>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
         <div style="margin-bottom:10px" class='row'>
@@ -51,7 +51,7 @@
         {!! csrf_field() !!}
         <div class="form-group has-feedback">
             <label for="">Email</label>
-            <input autocomplete='off' type="email" class="form-control" name='email' required placeholder="Masukkan email Anda yang terdaftar di sini"/>
+            <input autocomplete='off' type="email" class="form-control" name='email' required placeholder="Enter your email which is registered here"/>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
             <div class="help-block">Make sure your email is registered in our system</div>
         </div>
@@ -84,14 +84,14 @@
 
             <div class="form-group has-feedback">
                 <label for="">Password</label>
-                <input autocomplete='off' type="password" class="form-control" name='password' required placeholder="Masukkan Password Disini"/>
+                <input autocomplete='off' type="password" class="form-control" name='password' required placeholder="Enter Password Here"/>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
 
             <div class="form-group has-feedback">
                 <label for="">Captcha</label>
                 <p>What is the Sum of {{ $no1 }} dan {{ $no2 }}</p>
-                <input autocomplete='off' type="text" placeholder="Masukkan Hasilnya Disini" class="form-control" name='captcha' required />
+                <input autocomplete='off' type="text" placeholder="Enter the results here" class="form-control" name='captcha' required />
 
                 <div class="help-block">Fill in the Addition Above</div>
             </div>

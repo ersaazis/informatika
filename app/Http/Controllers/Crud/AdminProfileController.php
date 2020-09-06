@@ -8,7 +8,7 @@ class AdminProfileController extends \ersaazis\cb\controllers\AdminProfileContro
     public function getIndex() {
         $data = [];
         $data['page_title'] = cbLang("profile");
-        if(cb()->session()->roleId() == 2)
+        if(cb()->session()->roleId() != 1)
             return view('dosen/profile',$data);
         else
             return view(getThemePath('profile'),$data);
@@ -32,7 +32,7 @@ class AdminProfileController extends \ersaazis\cb\controllers\AdminProfileContro
             if(request()->hasFile('photo')) {
                 $data['photo'] = cb()->uploadFile('photo', true, 192, 256, 'image');
             }
-            if(cb()->session()->roleId() == 2){
+            if(cb()->session()->roleId() != 1){
                 $data['nip']=request('nip');
                 $data['nidn']=request('nidn');
                 $data['jenis_kelamin']=request('jenis_kelamin');

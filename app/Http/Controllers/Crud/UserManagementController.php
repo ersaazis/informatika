@@ -58,7 +58,7 @@ class UserManagementController extends \ersaazis\usermanagement\controllers\Admi
             $user['password'] = Hash::make(request('password'));
             $user['cb_roles_id'] = request('cb_roles_id');
             $id=DB::table('users')->insertGetId($user);
-            if($user['cb_roles_id'] == 2)
+            if($user['cb_roles_id'] != 1)
                 SearchDosen::dispatch($id,cb()->session()->id())->onConnection('database')->onQueue('dataDosen');
             return cb()->redirect(route("UserManagementControllerGetIndex"),"New user has been created!","success");
 
@@ -86,7 +86,7 @@ class UserManagementController extends \ersaazis\usermanagement\controllers\Admi
             if(request('password')) $user['password'] = Hash::make(request('password'));
             $user['cb_roles_id'] = request('cb_roles_id');
 
-            if($user['cb_roles_id'] == 2){
+            if($user['cb_roles_id'] != 1){
                 $user['nip']=request('nip');
                 $user['nidn']=request('nidn');
                 $user['jenis_kelamin']=request('jenis_kelamin');

@@ -17,7 +17,10 @@ class AdminSemuaDataPenelitianController extends CBController {
 		$this->addText("Year","tahun")->filterable(true)->strLimit(150)->maxLength(255);
 		$this->addText("Citation","titasi")->filterable(true)->strLimit(150)->maxLength(255);
 		$this->addSelectTable("Lecturer","users_id",["table"=>"users","value_option"=>"id","display_option"=>"name","sql_condition"=>"users.cb_roles_id=2"])->filterable(true);
-		
+        $this->hookIndexQuery(function($query) {
+            $query->orderBy('tahun', 'desc');
+            return $query;
+        });
 
     }
 }

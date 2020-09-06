@@ -39,7 +39,7 @@ $bottom_view='dosen/usermanBottom';
                 <input type="password" placeholder="Empty if not replaced" name="password" class="form-control">
             </div>
             <div id="informasi_dosen"
-            @if ($row->cb_roles_id != 2)
+            @if ($row->cb_roles_id == 1)
                 style="display:none"
             @endif
             >

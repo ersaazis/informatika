@@ -14,7 +14,7 @@ class DataPenelitian extends Migration
     public function up()
     {
         Schema::create('data_penelitian', function (Blueprint $table) {
-            $table->bigIncrements('id')->nullable();
+            $table->bigIncrements('id');
             $table->text('judul')->nullable();
             $table->text('penulis')->nullable();
             $table->text('publis')->nullable();

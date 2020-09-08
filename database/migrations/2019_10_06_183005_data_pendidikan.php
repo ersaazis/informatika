@@ -14,7 +14,7 @@ class DataPendidikan extends Migration
     public function up()
     {
         Schema::create('data_pendidikan', function (Blueprint $table) {
-            $table->bigIncrements('id')->nullable();
+            $table->bigIncrements('id');
             $table->integer('thn_lulus')->nullable();
             $table->string('nm_sp_formal')->nullable();
             $table->string('namajenjang')->nullable();

@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Jobs\PreprocessingPDF;
 use App\VSM;
 use ersaazis\cb\controllers\CBController;
 use ersaazis\cb\exceptions\CBValidationException;
@@ -102,6 +103,7 @@ class AdminDokumenSayaController extends CBController {
                     $data['file']=cb()->uploadFileProcess($filename, $ext, $file, true, null, null);
                     $id = DB::table($this->__call('getData',['table']))->insertGetId($data);
                     DB::table('dokumen_dosen')->insert(['users_id'=>cb()->session()->id(),'dokumen_id'=>$id]);
+                    PreprocessingPDF::dispatch($id)->onConnection('database')->onQueue('dataDokumen');
                 }
             }
             DB::table('ir_config')->where(['key'=>'generated'])->update(['value'=>0]);

@@ -80,7 +80,6 @@ class AdminSemuaDokumenController extends CBController {
                 $ext = strtolower($file->getClientOriginalExtension());
                 if($filename && $ext) {
                     $data['users_id']=cb()->session()->id();
-                    $data['private']=request('private');
                     $data['users_id']=cb()->session()->id();
                     $data['upload_by']=cb()->session()->name();
                     $data['name']=$filename;

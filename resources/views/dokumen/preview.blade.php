@@ -42,7 +42,7 @@
     });
     $('.preview').click(function(e){
         var href = $(this).attr('href');
-        $('#frameDokumen').attr('src',"https://docs.google.com/viewerng/viewer?url="+href);
+        $('#frameDokumen').attr('src',"https://docs.google.com/viewer?url="+href+"?download=yes&hl=en&pid=explorer&efh=false&a=v&chrome=false&embedded=true");
         $('#downloadDokumen').attr('href',href);
         $('#previewFile').modal('show');
         return false;

@@ -19,6 +19,7 @@ Route::get('/titasi-dosen/{id}', 'ProfilDosenController@getTitasi');
 Route::get(cb()->getAdminPath().'/profile/resetdata', 'ProfilDosenController@resetDataDosen');
 
 Route::get(cb()->getAdminPath().'/chart/jurusan/{tipe}/{tahun_awal}/{tahun_akhir}', 'DashboardController@getChartJurusan');
+Route::get(cb()->getAdminPath().'/wordcloud', 'DashboardController@getWordCloud');
 
 Route::group(['middleware' => ['web', \ersaazis\cb\middlewares\CBBackend::class], 'prefix' => cb()->getAdminPath()], function () {
     Route::get('/chart/dosen/{tipe}/{tahun_awal}/{tahun_akhir}', 'DashboardController@getChartDosen');

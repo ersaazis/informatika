@@ -21,7 +21,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">Find a Lecturer</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
                 <div class="modal-body"><input type="search" name="cari" value="{{request('cari')}}" class="form-control" placeholder="Search By Name / NIP / NIDN"></div>
-                <div class="modal-footer"><button class="btn btn-light" type="submit" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Search</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="submit" data-dismiss="modal">Close</button><input class="btn btn-primary" type="submit" value="Search"></div>
             </div>
         </div>
         </form>

@@ -21,15 +21,17 @@ class ProfilDosenController extends Controller
     public function semuaDosen(){
         $data = [];
         $data['page_title'] = "Informatics Engineering Department Profile - ".cb()->getAppName();
+        $data['header'] = "All Lecturers";
+        $data['subheader'] = "Informatics Engineering Department";
         $data['dosen']=DB::table('users')->where('cb_roles_id',2)->paginate($this->showData);
         return view('profil.semuadosen', $data);
     }
     public function cariDosen(){
         $cari="%".str_replace(' ','%',request('cari'))."%";
         $data = [];
-        $data['page_title'] = "Hasil Pencarian untuk $cari - ".cb()->getAppName();
-        $data['header'] = "Pencarian Dosen";
-        $data['subheader'] = "Hasil Pencarian untuk ".request('cari');
+        $data['page_title'] = "Search Results for ".request('cari')." - ".cb()->getAppName();
+        $data['header'] = "Find a Lecturer";
+        $data['subheader'] = "Search Results for \"".request('cari').'"';
         $data['dosen']=DB::table('users')->where('cb_roles_id',2)->where(function ($query) use ($cari) {
             $query->orWhere('name','like',$cari);
             $query->orWhere('nip','like',$cari);

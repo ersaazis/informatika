@@ -1,4 +1,4 @@
-@extends('profil.layout.main')
+@extends('profil.layout.main2')
 @section('content')
     <div class="article-list">
         <div class="container">

@@ -69,7 +69,7 @@ class DashboardController extends Controller
         ->setRemoveNumbers(true)
         ->setRemoveTrailing(true)
         ->setRemoveUnwanted(true)
-        ->setMinLength(5)
+        ->setMinLength(4)
         ->setMaxLength(20)
         ->build();
         $words=DB::table('data_penelitian')->first(DB::raw('GROUP_CONCAT(judul SEPARATOR " ") as judul'))->judul;

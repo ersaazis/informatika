@@ -87,8 +87,10 @@ class VSM extends Model
         }
         $rank=[];
         foreach($queryDokumen as $k=>$v){
-            if ($sqrtQ <= 0)
+            if ($sqrtQ <= 0){
+                $rank[$k]=0;
                 continue;
+            }
             $dokumen=DB::table('dokumen')->find($k);
             $rank[$k]=$v['sum']/($dokumen->sqrt*$sqrtQ);
             // echo $v['sum']." \n";

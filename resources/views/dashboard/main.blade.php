@@ -1,5 +1,12 @@
 @extends(getThemePath('layout.layout'))
 @section('content')
+@if (cb()->session()->roleId() == 1 or cb()->session()->roleId() == 3 or cb()->session()->roleId() == 4)
+<div class="row">
+    <div class="col-md-12">
+        <a href="{{cb()->getAdminUrl('print')}}" target="_blank" class="btn btn-primary">Print Research All Lecturer</a>
+    </div>
+</div>
+@endif
 <div class="row">
     @include('dashboard.chart_jurusan')
     @if (cb()->session()->roleId() != 1)

@@ -22,6 +22,7 @@ Route::get(cb()->getAdminPath().'/chart/jurusan/{tipe}/{tahun_awal}/{tahun_akhir
 Route::get(cb()->getAdminPath().'/wordcloud', 'DashboardController@getWordCloud');
 
 Route::group(['middleware' => ['web', \ersaazis\cb\middlewares\CBBackend::class], 'prefix' => cb()->getAdminPath()], function () {
+    Route::get('/print', 'DashboardController@printLaporan');
     Route::get('/chart/dosen/{tipe}/{tahun_awal}/{tahun_akhir}', 'DashboardController@getChartDosen');
 
     Route::get('/users/import', 'crud\UserManagementController@import');

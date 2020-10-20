@@ -15,7 +15,9 @@ class ProfilDosenController extends Controller
     public function index(){
         $data = [];
         $data['page_title'] = "Informatics Engineering Department Profile - ".cb()->getAppName();
-        $data['dosen']=DB::table('users')->where('cb_roles_id',2)->inRandomOrder()->limit($this->showData)->get();
+        $data['dosen']=DB::table('users')->where(function($q){
+            $q->where('cb_roles_id',2)->orWhere('cb_roles_id',3)->orWhere('cb_roles_id',4);
+        })->inRandomOrder()->limit($this->showData)->get();
         return view('profil.index', $data);
     }
     public function semuaDosen(){
@@ -23,7 +25,9 @@ class ProfilDosenController extends Controller
         $data['page_title'] = "Informatics Engineering Department Profile - ".cb()->getAppName();
         $data['header'] = "All Lecturers";
         $data['subheader'] = "Informatics Engineering Department";
-        $data['dosen']=DB::table('users')->where('cb_roles_id',2)->paginate($this->showData);
+        $data['dosen']=DB::table('users')->where(function($q){
+            $q->where('cb_roles_id',2)->orWhere('cb_roles_id',3)->orWhere('cb_roles_id',4);
+        })->paginate($this->showData);
         return view('profil.semuadosen', $data);
     }
     public function cariDosen(){
@@ -32,7 +36,9 @@ class ProfilDosenController extends Controller
         $data['page_title'] = "Search Results for ".request('cari')." - ".cb()->getAppName();
         $data['header'] = "Find a Lecturer";
         $data['subheader'] = "Search Results for \"".request('cari').'"';
-        $data['dosen']=DB::table('users')->where('cb_roles_id',2)->where(function ($query) use ($cari) {
+        $data['dosen']=DB::table('users')->where(function($q){
+            $q->where('cb_roles_id',2)->orWhere('cb_roles_id',3)->orWhere('cb_roles_id',4);
+        })->where(function ($query) use ($cari) {
             $query->orWhere('name','like',$cari);
             $query->orWhere('nip','like',$cari);
             $query->orWhere('nidn','like',$cari);
@@ -53,7 +59,7 @@ class ProfilDosenController extends Controller
     public function resetDataDosen(){
         if(cb()->session()->id()){
             $id=cb()->session()->id();
-            SearchDosen::dispatch($id,$id)->onConnection('database');
+            SearchDosen::dispatch($id,$id)->onConnection('database')->onQueue('dataDosen');
         }
         return cb()->redirect(cb()->getAdminUrl('profile'),'Proses Reset Data Kamu Sedang Dalam Antrian','success');
     }

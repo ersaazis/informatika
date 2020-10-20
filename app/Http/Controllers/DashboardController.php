@@ -14,6 +14,18 @@ use Symfony\Component\HttpKernel\Event\ViewEvent;
 
 class DashboardController extends Controller
 {
+    public function printLaporan(){
+        if(cb()->session()->roleId() == 1 or cb()->session()->roleId() == 3 or cb()->session()->roleId() == 4){
+            $data['dosen']=DB::table('users')->where(function($q){
+                $q->where('cb_roles_id',2)->orWhere('cb_roles_id',3)->orWhere('cb_roles_id',4);
+            })->get();
+            $data['penelitian']=array();
+            foreach ($data['dosen'] as $item){
+                $data['penelitian'][$item->id]=DB::table('data_penelitian')->where('users_id',$item->id)->get();
+            }
+            return view('dashboard.print',$data);
+        }
+    }
     public function getIndex(){
         $data = [];
         $data['page_title'] = "Dashboard - ".cb()->getAppName();

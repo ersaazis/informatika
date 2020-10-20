@@ -18,7 +18,7 @@
                     </a>
                     <h3 class="name">{{$item->name}}</h3>
                     <p class="description">NIP.{{$item->nip}} <br>NIDN.{{$item->nidn}}</p>
-                    <a class="action" href="{{url('/dosen/'.$item->id.'/'.Str::slug($item->name,'-'))}}"><i class="fa fa-arrow-circle-right"></i></a>
+                    <a class="btn btn-sm btn-success mt-2" style="background: rgba(145,196,72,1);border:0" href="{{url('/dosen/'.$item->id.'/'.Str::slug($item->name,'-'))}}">Detail <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             @endforeach
             </div>

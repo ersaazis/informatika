@@ -2,7 +2,8 @@
     $tahun_awal_jurusan=date('Y')-10;
     $tahun_akhir_jurusan=date('Y');
 @endphp
-@extends('profil.layout.header')
+@extends('profil.layout.layout')
+@section('header')
     <main class="page landing-page">
         <section class="clean-block clean-hero" style="color: rgba(145,196,72,0.8);">
             <div class="text">
@@ -17,7 +18,7 @@
         </section>
     </main>
     @yield('content')
-@extends('profil.layout.footer')
+@endsection
 @push('head')
 <link rel="stylesheet" type="text/css" href="{{url('assets/chartjs/Chart.min.css')}}">
 @endpush
@@ -42,9 +43,30 @@
             ]
         },
         options: {
+            hover: {
+                animationDuration: 0
+            },
+            animation: {
+                duration: 1,
+                onComplete: function() {
+                    var chartInstance = this.chart,
+                    ctx = chartInstance.ctx;
+
+                    ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+
+                    this.data.datasets.forEach(function(dataset, i) {
+                    var meta = chartInstance.controller.getDatasetMeta(i);
+                    meta.data.forEach(function(bar, index) {
+                        var data = dataset.data[index];
+                        ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                    });
+                    });
+                }
+            },
             tooltips: {
-                mode: 'index',
-                intersect: false
+                enabled: false,
             },
             scales: {
                 yAxes: [{

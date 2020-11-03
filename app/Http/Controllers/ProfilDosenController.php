@@ -53,7 +53,7 @@ class ProfilDosenController extends Controller
         $data['riwayat_penelitian']=DB::table('data_penelitian')->where('users_id',$id)->get();
         $data['riwayat_mengajar']=DB::table('data_mengajar')->where('users_id',$id)->get();
         $data['header'] = $data['dosen']->name;
-        $data['subheader'] = $data['dosen']->fungsional;
+        $data['subheader'] = DB::table('cb_roles')->find($data['dosen']->cb_roles_id)->name;
         return view('profil.profil', $data);
     }
     public function resetDataDosen(){

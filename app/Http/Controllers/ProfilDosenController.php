@@ -61,7 +61,7 @@ class ProfilDosenController extends Controller
             $id=cb()->session()->id();
             SearchDosen::dispatch($id,$id)->onConnection('database')->onQueue('dataDosen');
         }
-        return cb()->redirect(cb()->getAdminUrl('profile'),'Proses Reset Data Kamu Sedang Dalam Antrian','success');
+        return cb()->redirect(cb()->getAdminUrl('profile'),'Your Data Reset Process is In Queue','success');
     }
     public function getTitasi($id){
         $data=DB::table('data_penelitian')->find($id);
